@@ -641,10 +641,7 @@ async def main() -> None:
 
         @bot.on(events.CallbackQuery(data=b"lakes:handled"))
         async def handled_callback(event):
-            # В публичном канале кнопку видят все, поэтому удалить пост может только владелец бота.
-            if event.sender_id != admin_id:
-                await event.answer("Эта кнопка только для LAKES TEAM.", alert=True)
-                return
+            # Любой пользователь может отметить пост обработанным и удалить его из канала.
             try:
                 await event.answer("✅ Отмечено. Удаляю пост…")
                 await bot.delete_messages(event.chat_id, [event.message_id])
